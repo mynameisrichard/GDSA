@@ -21,7 +21,7 @@ xhttp.onreadystatechange = function() {
 function showResult(xml) {
     
     var txt = ""; //string for result
-   path = '/svg/g/polyline/@id | /svg/g/rect/@x | /svg/g/rect/@y'; //select rectangle id (i.e. station name) | select rectangle x | select rectangle y
+   path = '/svg/g/polyline/@id | /svg/g/polyline/@points'; //select polyline id (i.e. station name) | select polyline points
   // path = '/svg/g[@contains(@id,'lul')]'
     if (xml.evaluate) {
 
