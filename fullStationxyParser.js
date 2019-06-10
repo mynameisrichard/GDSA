@@ -112,14 +112,12 @@ function addStationNames () {
 		var myTable = document.getElementById("stationlist");
 		var stationListRows = myTable.getElementsByTagName('tr');
 		
-		for (var i=1; i < stationListRows.length;i++){
+		for (var i=0; i < stationListRows.length;i++){
 			
 			var cell = stationListRows[i].getElementsByTagName('td');
 			var stationName = cell[0].innerHTML; //get station id from element Name column
-			var currentRow = stationListRows[i];
-            var newCol = currentRow.insertcell(-1);
-            newCol.innerHTML=stationName;
-			//alert(stationName);
+			var newCol = stationListRows[i].insertCell(-1);
+            newCol.innerHTML=i+1;
 		}
 			
 }
