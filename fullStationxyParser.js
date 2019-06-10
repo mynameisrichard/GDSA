@@ -109,25 +109,17 @@ var path3 = "/svg/g/polyline[contains(@id,'"+lu_ID+"')]/@id | /svg/g/polyline[co
 
 function addStationNames () {
 	
-		var table = document.getElementById("stationlist");
-		var stationListRows = table.getElementsByTagName('tr');
+		var myTable = document.getElementById("stationlist");
+		var stationListRows = myTable.getElementsByTagName('tr');
 		
-		for (var i=0; i < stationListRows.length;i++){
+		for (var i=1; i < stationListRows.length;i++){
 			
 			var cell = stationListRows[i].getElementsByTagName('td');
-			var stationName = cell[0].innerHTML; //get station id from element ID column
-			var endRow = stationListRows[i].insertCell[2];
-			endRow.innerHTML = stationName;
+			var stationName = cell[0].innerHTML; //get station id from element Name column
+			var currentRow = stationListRows[i];
+            var newCol = currentRow.insertcell(-1);
+            newCol.innerHTML=stationName;
 			//alert(stationName);
 		}
-		
-
-
-	
+			
 }
-
-
-
-
-
-
