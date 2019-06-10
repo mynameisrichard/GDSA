@@ -3,10 +3,10 @@
 //function to get lu station letters
 function grab_GZZ(characters,startAtCharacter,endAtCharacter){
 
-	var startLetter = characters.indexOf(startAtCharacter,0) + 1; //don't return first letter
-	var stopLetter = characters.indexOf(endAtCharacter,0);
+	var startLetter = characters.indexOf(startAtCharacter,0) + startAtCharacter.length; //don't return first letter
+    var stopLetter = characters.indexOf(endAtCharacter,0);
 
-	return characters.substring(startLetter,stopLetter);
+    return characters.substring(startLetter,stopLetter);
 	
 }
 
@@ -117,7 +117,7 @@ function addStationNames () {
 			var cell = stationListRows[i].getElementsByTagName('td');
 			var stationName = cell[0].innerHTML; //get station id from element Name column
 			var newCol = stationListRows[i].insertCell(-1);
-            newCol.innerHTML=i+1;
+            newCol.innerHTML=grab_GZZ(stationName,'940gzz','_');
 		}
 			
 }
