@@ -21,7 +21,8 @@ xhttp.onreadystatechange = function() {
 function showResult(xml) {
     
     var txt = ""; //string for result
-   path = '/svg/g[@id="interchange-circles"]/g/g/path[@class="blue-fill"]/@d | /svg/g[@id="interchange-circles"]/g/g/path[@class="blue-fill"]/../../@id'; //select id=interchange circles | d attribute of path
+	var lu_ID = "940gzzlu";
+   var path = "/svg/g[@id='interchange-circles']/g[contains(@id,'"+lu_ID +"')]/g/path[@class='blue-fill']/@d | /svg/g[@id='interchange-circles']/g[contains(@id,'"+lu_ID +"')]/g/path[@class='blue-fill']/../../@id"; //select id=interchange circles | d attribute of path
   // path = '/svg/g[@contains(@id,'lul')]'
     if (xml.evaluate) {
 
