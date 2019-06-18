@@ -43,14 +43,18 @@ var txt = ""; //string for result
 var lu_ID = "940gzzlu"; //search string for within g id
 
 // PATHS!
-//this path selects the d element of all blue-fill paths within all lu interchange-circles and also returns the parent element, which should contain the station id
+//non-interchange step-free station. this path selects the d element of all blue-fill paths within all lu interchange-circles and also returns the parent element, which should contain the station id
 var path = "/svg/g[@id='interchange-circles']/g[contains(@id,'"+lu_ID +"')]/g/path[@class='blue-fill']/@d | /svg/g[@id='interchange-circles']/g[contains(@id,'"+lu_ID +"')]/g/path[@class='blue-fill']/../../@id";
-//select rectangle id (i.e. station name) | select rectangle x | select rectangle y
-var path2 = "/svg/g/rect[contains(@id,'"+lu_ID+"')]/@id | /svg/g/rect[contains(@id,'"+lu_ID+"')]/@x | /svg/g/rect[contains(@id,'"+lu_ID+"')]/@y";
- //select polyline id (i.e. station name) | select polyline points
+//select rectangle id (i.e. station name) | select rectangle x | select rectangle y - this is for non-interchange, non step-free stations. the little dash. circle/met/h&c/dis shared track is the second path string. these are one element lower
+var path2 = "/svg/g/rect[contains(@id,'"+lu_ID+"')]/@id | /svg/g/rect[contains(@id,'"+lu_ID+"')]/@x | /svg/g/rect[contains(@id,'"+lu_ID+"')]/@y" + " | /svg/g/g[contains(@id,'"+lu_ID +"')]/rect[contains(@id,'"+lu_ID+"')]/@id | /svg/g/ g[contains(@id,'"+lu_ID +"')]/rect[contains(@id,'"+lu_ID+"')]/@x | /svg/g/ g[contains(@id,'"+lu_ID +"')]/rect[contains(@id,'"+lu_ID+"')]/@y";;
+ //select polyline id (i.e. station name) | select polyline points - same as above but a few rendered as polylines for some reason!
 var path3 = "/svg/g/polyline[contains(@id,'"+lu_ID+"')]/@id | /svg/g/polyline[contains(@id,'"+lu_ID+"')]/@points";
 //this path for interchange stations, will return multiple entries for same station where the station is fully step-free and not joined by a single interchange circle, e.g. kings cross
 var path4 = "/svg/g[@id='interchange-circles']/g[contains(@id,'"+lu_ID +"')]/g[contains(@id,'"+lu_ID +"')]/g/path[@class='blue-fill']/@d | /svg/g[@id='interchange-circles']/g[contains(@id,'"+lu_ID +"')]/g[contains(@id,'"+lu_ID +"')]/g/path[@class='blue-fill']/../../@id";
+//interchange non-step-free but excludes stations with white fill and black border links and no step-free circles, e.g. baker street
+var path5 = "/svg/g[@id='interchange-circles']/g[contains(@id,'"+lu_ID+"')]/path[not(@id) and @class='white-fill']/../@id | /svg/g[@id='interchange-circles']/g[contains(@id,'"+lu_ID+"')]/path[not(@id) and @class='white-fill']/@d";
+//interchange non step-free stations with links - select first path element. not sure which are the circles and which the lines..
+var path6 = "/svg/g[@id='interchange-circles']/g[contains(@id,'"+lu_ID+"')]/g[contains(@id,'"+lu_ID+"')]/path[1]/../@id | /svg/g[@id='interchange-circles']/g[contains(@id,'"+lu_ID+"')]/g[contains(@id,'"+lu_ID+"')]/path[1]/@d";
 
 
 	//loop 1 with first path - non interchange step-free stations  
@@ -128,10 +132,50 @@ var path4 = "/svg/g[@id='interchange-circles']/g[contains(@id,'"+lu_ID +"')]/g[c
 
     }
 	
+		
+	//loop5 with path5  
+    if (xml.evaluate) {
+
+        var nodes5 = xml.evaluate(path5, xml, null, XPathResult.ANY_TYPE, null); //select first path and pass result to nodes
+        var result5 = nodes5.iterateNext();
+
+        while (result5) {
+            //check if first letter is M so know its the coordinate
+            var crrPath4 = result5.nodeValue;
+            if(crrPath4.substring(0,1)=="M"){
+                txt += "<td>" + grab_GZZ(crrPath4,'M',',') + "</td>" + "<td>" + grab_GZZ(crrPath4,',','c') + "</td>";
+            } else {
+                txt += "<tr><td>" + result5.nodeValue + "</td>";
+            }
+            result5 = nodes5.iterateNext();
+        } 
+
+    }
+			
+	//loop6 with path6  
+    if (xml.evaluate) {
+
+        var nodes6 = xml.evaluate(path6, xml, null, XPathResult.ANY_TYPE, null); //select first path and pass result to nodes
+        var result6 = nodes6.iterateNext();
+
+        while (result6) {
+            //check if first letter is M so know its the coordinate
+            var crrPath5 = result6.nodeValue;
+            if(crrPath5.substring(0,1)=="M"){
+                txt += "<td>" + grab_GZZ(crrPath5,'M',',') + "</td>" + "<td>" + grab_GZZ(grab_GZZ(crrPath5,',','c'),'','l') + "</td>";
+            } else {
+                txt += "<tr><td>" + result6.nodeValue + "</td>";
+            }
+            result6 = nodes6.iterateNext();
+        } 
+
+    }
+	
 	//add contents of txt variable to table body tag in html file
     document.getElementById("stationlist").innerHTML = txt; 
 }
 
+//this loops through the table, grabs the ID and finds the station label (i.e. the name)
 function addStationNames (xml2) {
 	
 		var myTable = document.getElementById("stationlist");
@@ -145,7 +189,7 @@ function addStationNames (xml2) {
             var station_ID = grab_GZZ(stationName,'940gzz','_');
 			
 			 //select text element with id from column 1. these are either inside text elements, or spread across tspans inside text elements, or both are inside g elements
-			var asnPath = "/svg//text[contains(@id,'"+station_ID+"')] | /svg//text[contains(@id,'"+station_ID+"')]/tspan | /svg//g[contains(@id,'"+station_ID+"')]/text/tspan | /svg//g[contains(@id,'"+station_ID+"')]/text"; 
+			var asnPath = "/svg//text[contains(@id,'"+station_ID+"')] | /svg//text[contains(@id,'"+station_ID+"')]/tspan | /svg//g[contains(@id,'"+station_ID+"')]/text/tspan | /svg//g[contains(@id,'"+station_ID+"')]/text | //g[contains(@id,'"+station_ID+"')]/g/text/tspan"; 
 			//alert(station_ID);
 			
 			//carry on if error - there are some labels buried in odd tag structure
@@ -157,13 +201,13 @@ function addStationNames (xml2) {
 			}
 			catch(e){}
 			
-			//counter
-			var newCol2 = stationListRows[i].insertCell(-1);
-			newCol2.innerHTML = i+1;
-			
 			//grabline
 			var newCol3 = stationListRows[i].insertCell(-1);
 			newCol3.innerHTML =  grab_GZZ(cell[0].innerHTML,'lul-','_940gzz').replace(/lul-/g,'');
 			
-		}
+			//counter
+			var newCol2 = stationListRows[i].insertCell(0);
+			newCol2.innerHTML = i+1;
+			
+		}		
 }
