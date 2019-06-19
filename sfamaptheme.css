@@ -1,0 +1,30 @@
+h1 {
+     font-family: 'NJFont', 'Hammersmith One', sans-serif;
+     font-size: 28px;
+	 font-weight: 500;
+     border-top-style: solid;
+     border-top-width: thin;
+     color: rgb(0,0,0);
+}
+ p {
+     font-family: 'NJFont', 'Hammersmith One', sans-serif;
+     font-size: 16px;
+     color: rgb(127,127,127);
+}
+ hr.thin {
+     height: 1px;
+}
+ .clearfix::after {
+     content: "";
+     clear: both;
+     display: table;
+}
+/* style station labels and river */
+ text.blue-fill, tspan.blue-fill {
+     font-family: "NJFont", Tahoma, Geneva, sans-serif;
+     font-size: 9px;
+}
+ .lightblue-fill {
+     font-family: "NJFont", Tahoma, Geneva, sans-serif;
+     font-size: 11px;
+}
