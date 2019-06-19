@@ -1,2 +1,2 @@
 # GDSA
-All the code for my data science accelerator project April-June 2019
+All the code for my Government Data Science Accelerator Project, April-June 2019
