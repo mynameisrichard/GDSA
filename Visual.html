@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<script src="https://d3js.org/d3.v4.js"></script>
+<script>
+
+//grab tube map and add all nodes to body
+d3.xml("TubeMap.svg").mimeType("image/svg+xml").get(function(error, xml) {
+  if (error) throw error;
+  d3.select("#mapCanvas").node().appendChild(xml.documentElement);
+  //add test g with circle over brixton
+  d3.select("#main_map").append('g').attr("id","TESTG").append('circle')
+    .attr("cx","538.3")
+    .attr("cy","665.2")
+    .attr("r","20")
+    .attr("fill-opacity",".25");
+
+    d3.select("#TESTG").append('circle')
+    .attr("cx","129.3")
+    .attr("cy","621.5")
+    .attr("r","20")
+    .attr("fill-opacity",".25");
+});
+
+//not sure why this doesnt work?
+    d3.select("#TESTG").append('circle')
+      .attr("cx","129.3")
+      .attr("cy","621.5")
+      .attr("r","20")
+      .attr("fill-opacity",".25");
+
+</script>
+<body>
+<div id="mapCanvas"></div>
+
+
+</body>
+
