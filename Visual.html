@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 
-<script src="https://d3js.org/d3.v4.js"></script>
+ <head>
+  <link rel="stylesheet" type="text/css" href="sfamaptheme.css">
+  <script src="https://d3js.org/d3.v4.js"></script>
+</head> 
+
 <script>
 
 //grab tube map and add all nodes to body
 d3.xml("TubeMap.svg").mimeType("image/svg+xml").get(function(error, xml) {
+
   if (error) throw error;
   d3.select("#mapCanvas").node().appendChild(xml.documentElement);
-  //add test g with circle over brixton
-  d3.select("#main_map").append('g').attr("id","TESTG").append('circle')
-    .attr("cx","538.3")
-    .attr("cy","665.2")
-    .attr("r","20")
-    .attr("fill-opacity",".25");
 
-    d3.select("#TESTG").append('circle')
-    .attr("cx","129.3")
-    .attr("cy","621.5")
-    .attr("r","20")
-    .attr("fill-opacity",".25");
+  //load test data from csv and draw a couple of circles
+  d3.csv("cities.csv",function(data) {
+  
+	//turn strings to numbers - forEach calls a function for each element in an array (in this case our array is data)
+	data.forEach(function(d){
+		d.score = +d.score;
+	});
+  
+	d3.select("#main_map").append('g').attr("id","TESTG").append('circle')
+	.attr("cx","538.3")
+	.attr("cy","665.2")
+	.attr("r","20")
+	.attr("fill-opacity",".25");
+
+	d3.select("#TESTG").append('circle')
+	.attr("cx","129.3")
+	.attr("cy","621.5")
+	.attr("r","20")
+	.attr("fill-opacity",".25");
+		
+	});
+	
 });
 
 //not sure why this doesnt work?
@@ -29,9 +45,16 @@ d3.xml("TubeMap.svg").mimeType("image/svg+xml").get(function(error, xml) {
       .attr("fill-opacity",".25");
 
 </script>
-<body>
-<div id="mapCanvas"></div>
 
+<body>
+
+	<div id="titleBar">
+		<h1>My SFA visual title</h1>
+		<p> And the sub-title as well
+	</div>
+
+	<div id="mapCanvas"></div>
 
 </body>
 
+</html>
