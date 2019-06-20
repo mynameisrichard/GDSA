@@ -10,29 +10,30 @@
 //grab tube map and add all nodes to body
 d3.xml("TubeMap.svg").mimeType("image/svg+xml").get(function(error, xml) {
 
-  if (error) throw error;
-  d3.select("#mapCanvas").node().appendChild(xml.documentElement);
+  	if (error) throw error;
+  	d3.select("#mapCanvas").node().appendChild(xml.documentElement);
 
-  //load test data from csv and draw a couple of circles
-  d3.csv("cities.csv",function(data) {
+  	//load test data from csv and draw a couple of circles
+  	d3.csv("cities.csv",function(data) {
   
-	//turn strings to numbers - forEach calls a function for each element in an array (in this case our array is data)
-	data.forEach(function(d){
-		d.score = +d.score;
-	});
+		//turn strings to numbers - forEach calls a function for each element in an array (in this case our array is data)
+		data.forEach(function(d){
+			d.score = +d.score;
+		});
   
-	d3.select("#main_map").append('g').attr("id","TESTG").append('circle')
-	.attr("cx","538.3")
-	.attr("cy","665.2")
-	.attr("r","20")
-	.attr("fill-opacity",".25");
+            //g wrapper for hotspots
+            var hotSpots = d3.select("#main_map").append('g').attr("id","hotSpots;")
+            
+            //try dynamic update with data
+            hotSpots.selectAll("circle")
+                        .data(data)
+                        .enter().append("circle")
+                        .attr("cx",function(d,i) { return (i)*150; })
+                        .attr("cy",function(d,i) { return (i)*150; })
+                        .attr("r",function(d) { return (d.score); })
+                        .attr("fill","red")
+                        .attr("fill-opacity",".4");
 
-	d3.select("#TESTG").append('circle')
-	.attr("cx","129.3")
-	.attr("cy","621.5")
-	.attr("r","20")
-	.attr("fill-opacity",".25");
-		
 	});
 	
 });
