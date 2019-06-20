@@ -13,29 +13,43 @@ d3.xml("TubeMap.svg").mimeType("image/svg+xml").get(function(error, xml) {
   	if (error) throw error;
   	d3.select("#mapCanvas").node().appendChild(xml.documentElement);
 
-  	//load test data from csv and draw a couple of circles
-  	d3.csv("cities.csv",function(data) {
-  
-		//turn strings to numbers - forEach calls a function for each element in an array (in this case our array is data)
-		data.forEach(function(d){
+	//load both csvs before doing anything. v5 has promise..
+	d3.queue()
+	.defer(d3.csv, "cities.csv")
+	.defer(d3.csv, "cities2.csv")
+	//data=cities.csv, data2... etc
+	.await(function(error, data, data2) {
+		if (error) {
+			throw(error);
+		}
+		else {
+			data.forEach(function(d){
 			d.score = +d.score;
 		});
-  
+
+			/*create map object. second argument sets the key, which in this case in the 14 station names in the data, returned via the anonymous function
+			we can then access elements from the map object with this key.. i think! */
+			var map = d3.map(data2, function(d) { return d.Station; });
+
             //g wrapper for hotspots
             var hotSpots = d3.select("#main_map").append('g').attr("id","hotSpots;")
             
             //try dynamic update with data
             hotSpots.selectAll("circle")
                         .data(data)
-                        .enter().append("circle")
-                        .attr("cx",function(d,i) { return (i+1)*150; })
-                        .attr("cy",function(d,i) { return (i+1)*150; })
+						.enter().append("circle")
+						//use station name from data (i.e. d.station) to get x and y from data2
+						.attr("cx",function(d,i) { return map.get(d.station).x; })
+						.attr("cy",function(d){ return map.get(d.station).y;})
                         .attr("r",function(d) { return (d.score); })
                         .attr("fill","red")
-                        .attr("fill-opacity",".4");
-
+                        .attr("fill-opacity","0.25");
+		
+			//code
+		}
+	//function(error,data,data2) end
 	});
-//end of xml function	
+	//end of xml function
 });
 
 </script>
