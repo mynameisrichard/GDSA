@@ -28,8 +28,8 @@ d3.xml("TubeMap.svg").mimeType("image/svg+xml").get(function(error, xml) {
             hotSpots.selectAll("circle")
                         .data(data)
                         .enter().append("circle")
-                        .attr("cx",function(d,i) { return (i)*150; })
-                        .attr("cy",function(d,i) { return (i)*150; })
+                        .attr("cx",function(d,i) { return (i+1)*150; })
+                        .attr("cy",function(d,i) { return (i+1)*150; })
                         .attr("r",function(d) { return (d.score); })
                         .attr("fill","red")
                         .attr("fill-opacity",".4");
