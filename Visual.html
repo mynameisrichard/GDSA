@@ -11,7 +11,16 @@
 d3.xml("TubeMap.svg").mimeType("image/svg+xml").get(function(error, xml) {
 
   	if (error) throw error;
-  	d3.select("#mapCanvas").node().appendChild(xml.documentElement);
+	  d3.select("#mapCanvas").node().appendChild(xml.documentElement);
+	
+	  //remove tram paths/lines
+	  d3.selectAll("path[id*='tram']").remove();
+	  d3.selectAll("line[id*='tram']").remove();
+	  //remove tram interchange markers
+	  d3.selectAll("g[data-linestop='tram']").remove();
+	  //remove 940gzzcr from station names
+	  d3.selectAll("g[id*='940gzzcr']").remove();
+	  
 
 	//load both csvs before doing anything. v5 has promise..
 	d3.queue()
@@ -45,11 +54,10 @@ d3.xml("TubeMap.svg").mimeType("image/svg+xml").get(function(error, xml) {
                         .attr("fill","red")
                         .attr("fill-opacity","0.25");
 		
-			//code
 		}
 	//function(error,data,data2) end
 	});
-	//end of xml function
+//end of xml function
 });
 
 </script>
