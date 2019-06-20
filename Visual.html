@@ -12,15 +12,16 @@ d3.xml("TubeMap.svg").mimeType("image/svg+xml").get(function(error, xml) {
 
   	if (error) throw error;
 	  d3.select("#mapCanvas").node().appendChild(xml.documentElement);
-	
+		
+	  //REMOVE TRAM FROM MAP
 	  //remove tram paths/lines
-	  d3.selectAll("path[id*='tram']").remove();
-	  d3.selectAll("line[id*='tram']").remove();
+	  d3.selectAll("g[id='tram-tram']").remove();
 	  //remove tram interchange markers
 	  d3.selectAll("g[data-linestop='tram']").remove();
-	  //remove 940gzzcr from station names
-	  d3.selectAll("g[id*='940gzzcr']").remove();
-	  
+	  //remove station labels
+	  d3.selectAll("g[id*='s-940gzzcr']").remove();
+	  //make lost NR symbol white
+	  d3.select("polygon[id*='s-940gzzcr']").attr("fill","#FFFFFF");
 
 	//load both csvs before doing anything. v5 has promise..
 	d3.queue()
