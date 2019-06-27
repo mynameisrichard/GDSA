@@ -1,129 +1,154 @@
 <!DOCTYPE html>
 
- <head>
-  <link rel="stylesheet" type="text/css" href="sfamaptheme.css">
-  <script src="https://d3js.org/d3.v4.js"></script>
-</head> 
+<head>
+	<link rel="stylesheet" type="text/css" href="sfamaptheme.css">
+	<script src="d3.v4.js"></script>
+</head>
 
 <script>
 
-//grab tube map and add all nodes to body
-d3.xml("TubeMap.svg").mimeType("image/svg+xml").get(function(error, xml) {
+	//grab tube map and add all nodes to body
+	d3.xml("TubeMap.svg").mimeType("image/svg+xml").get(function (error, xml) {
 
-  	if (error) throw error;
-	  d3.select("#mapCanvas").node().appendChild(xml.documentElement);
-		
-	  //REMOVE TRAM FROM MAP
-	  //remove tram paths/lines
-	  d3.selectAll("g[id='tram-tram']").remove();
-	  //remove tram interchange markers
-	  d3.selectAll("g[data-linestop='tram']").remove();
-	  //remove station labels
-	  d3.selectAll("g[id*='s-940gzzcr']").remove();
-	  //make lost NR symbol white
-	  d3.select("polygon[id*='s-940gzzcr']").attr("fill","#FFFFFF");
-	  
-	 
-	 
-	 // tooltips sit in a div that overlaps the map
-	 var div = d3.select("body").append("div")
-    .attr("class", "tooltip")
-	.attr("left","750px")
-	.attr("top","400px")
-    .style("opacity", 0);
-	  
-	 var mouseOverCircle = function(d){
-		
-							d3.select(this)
-								.attr("stroke-width","3")
-								.attr("stroke","black");
-						
-							div.transition()
-							 .duration(900)
-							 .style("opacity", .9);
-						   div.html(d.station + "<br/>" +d.score)
-							//get mouse position - UPDATE this to 
-							.style("left", (d3.event.pageX) + "px")
-							.style("top", (d3.event.pageY - 28) + "px");
-	 }
-	 
-	 	 var mouseOutCircle = function(d){
-		
-							d3.select(this)
-								.attr("stroke-width","0")
-								.attr("stroke","black");
-						
-							div.transition()
-							 .duration(200)
-							 .style("opacity", 0);
+		if (error) throw error;
+		d3.select("#mapCanvas").node().appendChild(xml.documentElement);
 
-	 }
 
-	//load both csvs before doing anything. v5 has promise..
-	d3.queue()
-	.defer(d3.csv, "scores.csv")
-	.defer(d3.csv, "coord.csv")
-	//data=scores.csv, data2=coord.csv
-	.await(function(error, data, data2) {
-		if (error) {
-			throw(error);
+		//REMOVE TRAM FROM MAP
+		//remove tram paths/lines
+		d3.selectAll("g[id='tram-tram']").remove();
+		//remove tram interchange markers
+		d3.selectAll("g[data-linestop='tram']").remove();
+		//remove station labels
+		d3.selectAll("g[id*='s-940gzzcr']").remove();
+		//make lost NR symbol white
+		d3.select("polygon[id*='s-940gzzcr']").attr("fill", "#FFFFFF");
+
+		//circles for radio buttons
+		/*var circleArray =[1,2,3,4]
+		var radioButtons = d3.select("#weekSelectContainer").append("g");
+		radioButtons.selectAll("radioButton")
+			.data(circleArray)
+			.enter()
+			.append("circle")
+			.attr("cx", function(d) { return(d)*100; })
+			.attr("cy", function(d) { return(d)*100; })
+			.attr("class","radioButton")
+			.on("click",radioSelect);*/
+			
+		 
+		// div for station info, sits inside another div
+		var stationInfo = d3.select("#stationInfoContainer").append("div")
+			//.attr("class", "infoBox")
+			.style("opacity", .8);
+
+		var mouseOverCircle = function (d) {
+
+			d3.select(this)
+				.attr("stroke-width", "2")
+				.attr("stroke", "black");
+
+			stationInfo.transition()
+				.duration(300)
+				.style("opacity", .9);
+			stationInfo.html("<h4>" + d.station + "<br/>" + "Availability: " + d.score + "%</h4>")
+				//get mouse position - UPDATE this to 
+				//.style("left", (d3.event.pageX) + "px")
+				//.style("top", (d3.event.pageY - 28) + "px");
 		}
-		else {
-			data.forEach(function(d){
-			d.score = +d.score;
+
+		var mouseOutCircle = function (d) {
+
+			d3.select(this)
+				.attr("stroke-width","1")
+				.attr("stroke", "white");
+
+			stationInfo.transition()
+				.duration(700)
+				.style("opacity", 0);
+		}
+
+		//load both csvs before doing anything. v5 has promise..
+		d3.queue()
+			.defer(d3.csv, "scores.csv")
+			.defer(d3.csv, "coord.csv")
+			//data=scores.csv, data2=coord.csv
+			.await(function (error, data, data2) {
+				if (error) {
+					throw (error);
+				}
+				else {
+					//coerce scores to numbers
+					data.forEach(function (d) {
+						d.score = +d.score;
+					});
+
+					/*create map object. second argument sets the key, which in this case in the 14 station names in the data, returned via the anonymous function
+					we can then access elements from the map object with this key.. i think! */
+					var map = d3.map(data2, function (d) { return d.Station; });
+
+					var weeklyScores = d3.map(data, function (d) { return d.week; });
+					
+					var week1 = data.filter()
+
+					console.log(data);
+					console.log(weeklyScores);
+
+					//set up transition function - increases radius and opacity values gradually
+					var growFadeIn = d3.transition().duration(2000).ease(d3.easeBounce);
+
+					//g wrapper for hotspots
+					var hotSpots = d3.select("#main_map").append('g').attr("id", "hotSpots;")
+
+					//try dynamic update with data
+					hotSpots.selectAll("circle")
+						.data(data)
+						.enter().append("circle")
+						.attr("class", "hotspot")
+						//use station name from data (i.e. d.station) to get x and y from data2
+						.attr("cx", function (d, i) { return map.get(d.station).x; })
+						.attr("cy", function (d) { return map.get(d.station).y; })
+						.attr("r", 0)
+						.attr("fill", "red")
+						.attr("stroke-wdith","1")
+						.attr("stroke","white")
+						//add event listeners to each element of enter selection
+						.on("mouseover", mouseOverCircle)
+						.on("mousemove", mouseOverCircle)
+						.on("mouseout", mouseOutCircle);
+
+					//transition effect; do this afterwards otherwise the mouseevents wont work - transition.on means something different to selection.on
+					hotSpots.selectAll("circle")
+						.transition(growFadeIn)
+						.attr("r", function (d) { return (d.score); })
+						.attr("fill-opacity", "0.25");
+
+					//end of else if
+				}
+				//function(error,data,data2) end
 			});
-
-			/*create map object. second argument sets the key, which in this case in the 14 station names in the data, returned via the anonymous function
-			we can then access elements from the map object with this key.. i think! */
-			var map = d3.map(data2, function(d) { return d.Station; });
-			
-			var weeklyScores = d3.map(data, function(d) { return d.week; });
-
-			//set up transition function - increases radius and opacity values gradually
-			var growFadeIn = d3.transition().duration(2000).ease(d3.easeBounce);
-
-            //g wrapper for hotspots
-            var hotSpots = d3.select("#main_map").append('g').attr("id","hotSpots;")
-            
-            //try dynamic update with data
-            hotSpots.selectAll("circle")
-				.data(data)
-				.enter().append("circle")
-				.attr("class","hotspot")
-				//use station name from data (i.e. d.station) to get x and y from data2
-				.attr("cx",function(d,i) { return map.get(d.station).x; })
-				.attr("cy",function(d){ return map.get(d.station).y;})
-				.attr("r",0)
-				.attr("fill","red")
-				//add event listeners to each element of enter selection
-				.on("mouseover", mouseOverCircle)
-				.on("mousemove",mouseOverCircle)
-				.on("mouseout", mouseOutCircle);
-			
-			//transition effect; do this afterwards otherwise the mouseevents wont work - transition.on means something different to selection.on
-			hotSpots.selectAll("circle")
-				.transition(growFadeIn)
-				.attr("r",function(d) { return (d.score); })
-				.attr("fill-opacity","0.25");
-		
-		//end of else if
-		}
-	//function(error,data,data2) end
+		//end of xml function
 	});
-//end of xml function
-});
 
 
 </script>
 
 <body>
 
-	<div id="titleBar">
-		<h1>My SFA visual title</h1>
-		<p> And the sub-title as well
+	<div id="titleBar" class="titleBar">
+		<h1>STEP-FREE ACCESS UNAVAILABILITY</h1>
+		<h2>Week 1 / Period 03 / 2019-20</h1>
 	</div>
 
 	<div id="mapCanvas"></div>
+
+	<div id="weekSelectContainer" class="infoBox">
+		<h3>Select week:</h3>
+	</div>
+	
+	<div id="stationInfoContainer" class="infoBox2">
+		<h3>Station details</h3>
+	</div>
 
 </body>
 
