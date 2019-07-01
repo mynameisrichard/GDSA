@@ -1,43 +1,89 @@
+body {
+     margin: 0;
+}
 h1 {
      font-family: 'NJFont', 'Hammersmith One', sans-serif;
      font-size: 28px;
-	 font-weight: 700;
-     border-top-style: solid;
-     border-top-width: thin;
+     font-weight: 700px;
+     margin-left: 5px;
+     margin-bottom: 0px;
      color: rgb(0,0,0);
 }
- p {
+h2 {
      font-family: 'NJFont', 'Hammersmith One', sans-serif;
-     font-size: 16px;
-     color: rgb(127,127,127);
+     font-size: 28px;
+     font-weight: 700;
+     margin-left: 5px;
+     margin-top: 0px;
+     color: rgb(188,213,230);
 }
- hr.thin {
-     height: 1px;
+h3 {
+     font-family: 'NJFont', 'Hammersmith One', sans-serif;
+     font-size: 20px;
+     font-weight: 700;
+     margin-left: 5px;
+     margin-top: 5px;
+     margin-bottom: 0;
+     color: black;
 }
- .clearfix::after {
+h4 {
+     font-family: 'NJFont', 'Hammersmith One', sans-serif;
+     font-size: 20px;
+     font-weight: 700;
+     margin-left: 5px;
+     margin-top: 5px;
+     color: white;
+}
+.clearfix::after {
      content: "";
      clear: both;
      display: table;
 }
 /* style station labels and river */
- text.blue-fill, tspan.blue-fill {
+text.blue-fill, tspan.blue-fill {
      font-family: "NJFont", Tahoma, Geneva, sans-serif;
      font-size: 9px;
 }
- .lightblue-fill {
+.lightblue-fill {
      font-family: "NJFont", Tahoma, Geneva, sans-serif;
      font-size: 11px;
 }
-div.tooltip {
-  position: absolute;
-  text-align: center;
-  width: 60px;
-  height: 28px;
-  padding: 2px;
-  font-family: 'NJFont', 'Hammersmith One', sans-serif;
-  font-size: 9px;
-  background: lightsteelblue;
-  border: 0px;
-  border-radius: 8px;
-  pointer-events: none;
+div.titleBar{
+  width: 100%;
+  height: 85px;
+  border-bottom-width: 0.5px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(188, 213, 230);
+}
+
+svg{
+    max-width: 100%;
+   }
+
+div.infoBox {
+  position: fixed;
+  text-align: left;
+  width: 300px;
+  height: 100px;
+  top: 135px;
+  right: 135px;
+  background-color: rgb(188, 213, 230);
+  border-top-width: 2px;
+  border-top-style: solid;
+  border-top-color: rgb(188, 213, 230);
+  border-radius: 1px;
+}
+
+div.infoBox2 {
+     position: fixed;
+     text-align: left;
+     width: 300px;
+     height: 100px;
+     top: 335px;
+     right: 135px;
+     background-color: rgb(188, 213, 230);
+     border-top-width: 2px;
+     border-top-style: solid;
+     border-top-color: rgb(188, 213, 230);
+     border-radius: 1px;
 }
