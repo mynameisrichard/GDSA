@@ -23,132 +23,177 @@
 		d3.selectAll("g[id*='s-940gzzcr']").remove();
 		//make lost NR symbol white
 		d3.select("polygon[id*='s-940gzzcr']").attr("fill", "#FFFFFF");
-
-		//circles for radio buttons
-		/*var circleArray =[1,2,3,4]
-		var radioButtons = d3.select("#weekSelectContainer").append("g");
-		radioButtons.selectAll("radioButton")
-			.data(circleArray)
-			.enter()
-			.append("circle")
-			.attr("cx", function(d) { return(d)*100; })
-			.attr("cy", function(d) { return(d)*100; })
-			.attr("class","radioButton")
-			.on("click",radioSelect);*/
-			
 		 
 		// div for station info, sits inside another div
 		var stationInfo = d3.select("#stationInfoContainer").append("div")
 			//.attr("class", "infoBox")
 			.style("opacity", .8);
 
-		var mouseOverCircle = function (d) {
+var mouseOverCircle = function (d) {
 
-			d3.select(this)
-				.attr("stroke-width", "2")
-				.attr("stroke", "black");
+            //console.log(d.station);
 
-			stationInfo.transition()
-				.duration(300)
-				.style("opacity", .9);
-			stationInfo.html("<h4>" + d.station + "<br/>" + "Availability: " + d.score + "%</h4>")
-				//get mouse position - UPDATE this to 
-				//.style("left", (d3.event.pageX) + "px")
-				//.style("top", (d3.event.pageY - 28) + "px");
-		}
+            d3.select(this)
+                .attr("stroke-width", "2")
+                .attr("stroke", "black");
 
-		var mouseOutCircle = function (d) {
+            stationInfo.transition()
+                .duration(300)
+                .style("opacity", .9);
+            stationInfo.html("<h4>" + d.station + "<br/>" + "Availability: " + d.score + "%</h4>")
+            //get mouse position - UPDATE this to 
+            //.style("left", (d3.event.pageX) + "px")
+            //.style("top", (d3.event.pageY - 28) + "px");
+        }
 
-			d3.select(this)
-				.attr("stroke-width","1")
-				.attr("stroke", "white");
+        var mouseOutCircle = function (d) {
 
-			stationInfo.transition()
-				.duration(700)
-				.style("opacity", 0);
-		}
+            d3.select(this)
+                .attr("stroke-width", "1")
+                .attr("stroke", "white");
 
-		//load both csvs before doing anything. v5 has promise..
-		d3.queue()
-			.defer(d3.csv, "scores.csv")
-			.defer(d3.csv, "coord.csv")
-			//data=scores.csv, data2=coord.csv
-			.await(function (error, data, data2) {
-				if (error) {
-					throw (error);
-				}
-				else {
-					//coerce scores to numbers
-					data.forEach(function (d) {
-						d.score = +d.score;
-					});
+            stationInfo.transition()
+                .duration(700)
+                .style("opacity", 0);
+        }
 
-					/*create map object. second argument sets the key, which in this case in the 14 station names in the data, returned via the anonymous function
-					we can then access elements from the map object with this key.. i think! */
-					var map = d3.map(data2, function (d) { return d.Station; });
+        //load both csvs before doing anything. v5 has promise..
+        d3.queue()
+            .defer(d3.csv, "scores.csv")
+            .defer(d3.csv, "coord.csv")
+            //data=scores.csv, data2=coord.csv
+            .await(function (error, data, data2) {
+                if (error) {
+                    throw (error);
+                }
+                else {
+                    //coerce scores to numbers
+                    data.forEach(function (d) {
+                        d.score = +d.score;
+                    });
 
-					var weeklyScores = d3.map(data, function (d) { return d.week; });
-					
-					var week1 = data.filter()
+                    /*create map object. second argument sets the key, which in this case in the 14 station names in the data, returned via the anonymous function
+                    we can then access elements from the map object with this key.. i think! */
+                    var map = d3.map(data2, function (d) { return d.Station; });
 
-					console.log(data);
-					console.log(weeklyScores);
+                    //set week value for initial display
+                    var selectedWeek = 1
+                    var weekData = data.filter(function (d) { return d.week == selectedWeek; });
 
-					//set up transition function - increases radius and opacity values gradually
-					var growFadeIn = d3.transition().duration(2000).ease(d3.easeBounce);
+                    //set up transition function - increases radius and opacity values gradually
+                    var growFadeIn = d3.transition().duration(2500).ease(d3.easeBounce);
 
-					//g wrapper for hotspots
-					var hotSpots = d3.select("#main_map").append('g').attr("id", "hotSpots;")
+                    //g wrapper for hotspots
+                    var hotSpots = d3.select("#main_map").append('g').attr("id", "hotSpots;")
 
-					//try dynamic update with data
-					hotSpots.selectAll("circle")
-						.data(data)
-						.enter().append("circle")
-						.attr("class", "hotspot")
-						//use station name from data (i.e. d.station) to get x and y from data2
-						.attr("cx", function (d, i) { return map.get(d.station).x; })
-						.attr("cy", function (d) { return map.get(d.station).y; })
-						.attr("r", 0)
-						.attr("fill", "red")
-						.attr("stroke-wdith","1")
-						.attr("stroke","white")
-						//add event listeners to each element of enter selection
-						.on("mouseover", mouseOverCircle)
-						.on("mousemove", mouseOverCircle)
-						.on("mouseout", mouseOutCircle);
+                    //colour and size scale for hotspots. red is worst. three sizes also.
+                    var scale;
 
-					//transition effect; do this afterwards otherwise the mouseevents wont work - transition.on means something different to selection.on
-					hotSpots.selectAll("circle")
-						.transition(growFadeIn)
-						.attr("r", function (d) { return (d.score); })
-						.attr("fill-opacity", "0.25");
+                    //try dynamic update with data
+                    /*hotSpots.selectAll("circle")
+                        .data(weekData)
+                        .enter().append("circle")
+                        .attr("class", "hotspot")
+                        .attr("id",function (d){ return d.station; })
+                        //use station name from data (i.e. d.station) to get x and y from data2
+                        .attr("cx", function (d, i) { return map.get(d.station).x; })
+                        .attr("cy", function (d) { return map.get(d.station).y; })
+                        .attr("r", 0)
+                        .attr("fill", "red")
+                        .attr("stroke-width","1")
+                        .attr("stroke","white")
+                        //add event listeners to each element of enter selection
+                        .on("mouseover", mouseOverCircle)
+                        .on("mousemove", mouseOverCircle)
+                        .on("mouseout", mouseOutCircle);
 
-					//end of else if
-				}
-				//function(error,data,data2) end
-			});
-		//end of xml function
-	});
+                    //transition effect; do this afterwards otherwise the mouseevents wont work - transition.on means something different to selection.on
+                    hotSpots.selectAll("circle")
+                        .transition(growFadeIn)
+                        .attr("r", function (d) { return (d.score); })
+                        .attr("fill-opacity", "0.25");
 
+*/
+                    update(weekData)
+
+                    //change data and call function when dropdown changes
+                    d3.select('#WeekNumber')
+                        .on('change', function () {
+                            //update data with new week
+                            selectedWeek = eval(d3.select(this).property('value'));
+                            weekData = data.filter(function (d) { return d.week == selectedWeek; });
+                            update(weekData);
+                        });
+
+                    function update(newData) {
+
+                        //new bind with key function so d3 can regonise which are new elements and which are exiting..?
+                        var updateSpots = hotSpots.selectAll("circle").data(newData, d => d.station);
+
+                        //add circles to the new data (placeholder enter selection), then merge this with the update selection
+                        updateSpots.enter().append("circle")
+                            .attr("class", "hotspot")
+                            //merge .enter() selection with other.. but what's in other?
+                            .merge(updateSpots)
+                            .transition(growFadeIn)
+                            .attr("id", function (d) { return d.station; })
+                            //use station name from data (i.e. d.station) to get x and y from data2
+                            .attr("cx", function (d, i) { return map.get(d.station).x; })
+                            .attr("cy", function (d) { return map.get(d.station).y; })
+                            .attr("r", function (d) { return (d.score); })
+                            .attr("fill", "red")
+                            .attr("fill-opacity", "0.25")
+                            .attr("stroke-wdith", "1")
+                            .attr("stroke", "white");
+
+                        //add mouse events
+                        hotSpots.selectAll("circle")
+                            .on("mouseover", mouseOverCircle)
+                            .on("mousemove", mouseOverCircle)
+                            .on("mouseout", mouseOutCircle);
+
+                        //update sub-heading
+                        var subHead = d3.select("h2");
+                        subHead.html("Week " + selectedWeek + " / Period 03 / 2019-20");
+
+                        //remove no-longer needed elements to topleft
+                        updateSpots.exit()
+                            .transition()
+                            .duration(1500)
+                            .attr("r", 0)
+                            .remove();
+                    }
+                    //end of else if
+                }
+                //function(error,data,data2) end
+            });
+        //end of xml function
+    });
 
 </script>
 
 <body>
 
-	<div id="titleBar" class="titleBar">
-		<h1>STEP-FREE ACCESS UNAVAILABILITY</h1>
-		<h2>Week 1 / Period 03 / 2019-20</h1>
-	</div>
+    <div id="titleBar" class="titleBar">
+        <h1>STEP-FREE ACCESS UNAVAILABILITY</h1>
+        <h2>Week 1 / Period 03 / 2019-20</h1>
+    </div>
 
-	<div id="mapCanvas"></div>
+    <div id="weekSelectContainer" class="infoBox">
+        <h3>Select week:</h3>
+        <select id="WeekNumber">
+            <option value="1" name="Bakerloo">1</option>
+            <option value="2" name="Central">2</option>
+            <option value="3" name="Victoria">3</option>
+            <option value="4" name="Victoria">4</option>
+        </select>
+    </div>
 
-	<div id="weekSelectContainer" class="infoBox">
-		<h3>Select week:</h3>
-	</div>
-	
-	<div id="stationInfoContainer" class="infoBox2">
-		<h3>Station details</h3>
-	</div>
+    <div id="stationInfoContainer" class="infoBox2">
+        <h3>Station details</h3>
+    </div>
+
+    <div id="mapCanvas" class="mapCanvas"></div>
 
 </body>
 
