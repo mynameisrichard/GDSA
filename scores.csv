@@ -1,8 +1,13 @@
-station,score,
-Brixton,55,
-Pinner,25,
-Edgware,33,
-Tottenham Hale,42,
-Green Park,47,
-Chalfont & Latimer,14,
-Chorleywood,17
+station,score,week,
+Brixton,55,1
+Pinner,25,1
+Edgware,33,1
+Tottenham Hale,42,1
+Green Park,47,1
+Chalfont & Latimer,14,1
+Chorleywood,17,1
+Kingsbury,14,2
+Bermondsey,15,2
+Brixton,25,2
+Pinner,45,2
+Edgware,13,2
