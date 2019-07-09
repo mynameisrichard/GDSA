@@ -1,13 +1,31 @@
-station,score,week,
-Brixton,55,1
-Pinner,25,1
-Edgware,33,1
-Tottenham Hale,42,1
-Green Park,47,1
-Chalfont & Latimer,14,1
-Chorleywood,17,1
-Kingsbury,14,2
-Bermondsey,15,2
-Brixton,25,2
-Pinner,45,2
-Edgware,13,2
+station,score,week
+Bond Street,94.2823486,4
+Canning Town,57.552842,2
+East Ham,98.866539,1
+Finsbury Park,66.9191956,4
+Golders Green,99.8542094,2
+Green Park,95.4362895,3
+Hainault,82.189913,4
+Harrow & Wealdstone,89.2452956,3
+Hillingdon,94.0609348,2
+Hounslow East,91.9393328,4
+Kilburn,95.4850437,4
+King's Cross St. Pancras,92.5726736,4
+London Bridge,33.8328619,3
+Morden,96.1010525,2
+Newbury Park,99.2788758,4
+North Greenwich,98.4280304,3
+Paddington,63.310917,3
+Pinner,99.5816134,3
+Southfields,99.0854866,1
+Southwark,98.8975714,3
+Tottenham Court Road,94.9915526,4
+Tottenham Hale,99.4261515,4
+Upminster,99.9027471,2
+Victoria,90.2177974,4
+Wembley Central,94.9921044,3
+Wembley Park,79.620217,4
+West Finchley,98.0510219,2
+West Ham,96.8100967,4
+Westminster,99.9909273,1
+Willesden Junction,62.5958301,4
