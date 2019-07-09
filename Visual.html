@@ -59,8 +59,8 @@ var mouseOverCircle = function (d) {
 
         //load both csvs before doing anything. v5 has promise..
         d3.queue()
-            .defer(d3.csv, "scores2.csv")
-            .defer(d3.csv, "coord2.csv")
+            .defer(d3.csv, "scores.csv")
+            .defer(d3.csv, "coord.csv")
             //data=scores.csv, data2=coord.csv
             .await(function (error, data, data2) {
                 if (error) {
