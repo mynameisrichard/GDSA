@@ -1,15 +1,310 @@
 Station,x,y
-Brixton,538.3,665.2
-Heathrow Terminal 4,129.3,621.5
-Heathrow T erminals 2 & 3,134.8,575.7
-Hounslow West,157.4,553.1
-Tottenham Hale,730.3,260.2
+Acton Town,235,502.7
+Aldgate,689.4,443.6
+Aldgate,691.7,443.6
+Aldgate East,715.6,431.3
+Alperton,228.1,347.1
+Amersham,95,160.8
+Angel,610.4,375.2
+Archway,587,266.1
+Arnos Grove,679.8,201.6
+Arsenal,661.5,286.6
+Baker Street,465.6,391.1
+Baker Street,473.5,383.2
+Balham,473.6,688.6
+Bank,645.3,467.7
+Barbican,612.2,411.5
+Barbican,613.8,409.9
+Barbican,615.4,408.3
+Barking,909.4,353
+Barkingside,892.1,241.6
+Barons Court,347.4,503.8
+Barons Court,347.4,510.7
+Bayswater,391.9,417.4
+Bayswater,389.6,417.4
+Becontree,929.4,338.8
+Belsize Park,528.7,302.6
 Bermondsey,681.7,510
-Southwark,565.8,544.8
-Green Park,475.8,461.4
+Bethnal Green,744.7,388.3
+Blackfriars,595.7,495.6
+Blackhorse Road,749.9,266.1
+Borough,598.5,562.1
+Boston Manor,192,523.1
+Bounds Green,679.8,213.5
+Bow Road,801.5,398.7
+Brent Cross,484.1,258
+Brixton,538.3,665.2
+Bromley-by-Bow,833.1,394.7
+Buckhurst Hill,843.2,177
+Burnt Oak,451.2,225.1
+Caledonian Road,635.4,313.5
+Camden Town,550.7,331
+Canada Water,724,510.1
+Canary Wharf,789.3,510
+Canning Town,846.5,463.9
+Canons Park,371.1,231.6
 Chalfont & Latimer,144.4,157.3
+Chalk Farm,541.9,315.9
+Chancery Lane,592.7,439
+Charing Cross,539.6,486
+Chesham,111.5,145.9
+Chigwell,871.8,207.9
+Chiswick Park,248.6,514.5
 Chorleywood,177.1,167.9
-Pinner,239.9,230.4
-Hendon Central,473.7,241.8
+Clapham Common,486.7,668.5
+Clapham North,498.8,651.4
+Clapham South,478.1,677.1
+Cockfosters,679.7,166.1
+Colindale,462.2,236.1
+Colliers Wood,446,714.5
+Covent Garden,548.9,446.4
+Croxley,201.8,178.4
+Dagenham East,952.1,316.1
+Dagenham Heathway,939.8,323.9
+Debden,844.3,158.7
+Dollis Hill,396.7,293.1
+Ealing Common,232.4,482.1
+Earl's Court,382.7,502.8
+Earl's Court,382.7,510.1
+East Acton,301.2,449.3
+East Finchley,586.1,234.3
+East Ham,899,362.9
+East Putney,374,604.2
+Eastcote,207,244
+Eastcote,205.4,245.6
 Edgware,436.1,204.3
+Edgware Road,401,371.2
+Elephant & Castle,552.1,610.2
+Elm Park,967.2,296.5
+Embankment,534.3,507.5
+Embankment,541.4,514.6
+Epping,843.2,135.3
+Euston,539.7,365.5
+Euston Square,556.3,384.7
+Euston Square,556.3,382.4
+Euston Square,556.3,380.2
+Fairlop,892.1,230.5
+Farringdon,602,391.8
+Finchley Central,585,218.2
+Finchley Road,439.9,348.9
+Finchley Road,444.9,343.9
+Finsbury Park,677.3,279.1
+Fulham Broadway,376.6,565.8
+Gants Hill,883.8,267.3
+Gloucester Road,406.7,508.5
+Gloucester Road,406.7,503.8
+Gloucester Road,406.7,510.7
+Golders Green,495.8,264
+Goldhawk Road,331.7,488.8
+Goldhawk Road,329.5,488.8
+Goodge Street,537.9,411.3
+Grange Hill,883.8,204.2
+Great Portland Street,500.4,376.4
+Great Portland Street,500.4,378.7
+Great Portland Street,500.4,381
+Green Park,475.8,461.4
+Greenford,174.1,352.7
+Gunnersbury,256.6,537.5
+Hainault,891,216.6
+Hammersmith (H&C),333.3,495.3
+Hammersmith (Dis),333.3,502.8
+Hammersmith (Dis),333.3,510.1
+Hammersmith,332.1,508.8
+Hampstead,505,279
+Hanger Lane,215.2,399.5
+Harlesden,316.8,314.6
+Harrow & Wealdstone,320.5,223.1
+Harrow- on-the-Hill,280.1,261.2
+Hatton Cross,145,570
+Heathrow 123,134.8,575.7
+Heathrow T4,129.3,621.5
+Heathrow T5,109.5,615.2
+Hendon Central,473.7,241.8
+High Barnet,585,164
+High Street Kensington,391.9,475.6
+High Street Kensington,389.6,475.6
+Highbury & Islington,664.2,321.1
+Highgate,586.1,246.8
+Hillingdon,132.2,227.2
+Holborn,564.2,432.7
+Holland Park,372.7,453.1
+Holloway Road,650.6,297.5
+Hornchurch,976.4,291.9
+Hounslow Central,166.4,548.7
+Hounslow East,175,535.5
+Hounslow West,157.4,553.1
+Hyde Park Corner,462,468.3
+Ickenham,147.3,230.5
+Ickenham,147.3,232.8
+Kennington,535.1,625.4
+Kensal Green,320.5,338.6
+Kensington (Olympia),376.6,479.2
+Kensington (Olympia),376.6,485.7
+Kentish Town,581.7,300.6
+Kenton,320.5,241
+Kew Gardens,253.7,561.5
+Kilburn,418.2,313.8
+Kilburn Park,320.3,363.2
+King's Cross St. Pancras,577.9,362.7
+King's Cross St. Pancras,577.9,370.7
+King's Cross St. Pancras,577.9,377.8
 Kingsbury,369.9,253.5
+Knightsbridge,441.8,488.6
+Ladbroke Grove,335.4,418.3
+Ladbroke Grove,333.2,418.3
+Lambeth North,545,570.1
+Lancaster Gate,434.5,449.2
+Latimer Road,335.4,429.6
+Latimer Road,333.1,429.6
+Leicester Square,539.6,457.4
+Leyton,844.3,311.1
+Leytonstone,844.3,280.8
+London Bridge,636.7,510
+Loughton,844.3,169.1
+Maida Vale,328.5,371.4
+Manor House,679.8,261.3
+Mansion House,603.2,485.7
+Mansion House,604.8,487.3
+Marble Arch,441.1,437.3
+Marylebone,436.8,373.8
+Mile End,777.1,397.8
+Mill Hill East,566,197.4
+Moor Park,207.3,198.5
+Moorgate,639.7,422.9
+Morden,412.5,743.5
+Mornington Crescent,545.9,347.1
+Neasden,386,282.6
+Newbury Park,892.1,255
+North Acton,284.6,453.1
+North Ealing,228.1,432.9
+North Greenwich,834.7,505.1
+North Harrow,250,241.3
+North Wembley,316.8,287.2
+Northfields,200.8,514.3
+Northolt,159.3,322.4
+Northwick Park,303.5,262.3
+Northwood,218.1,209.3
+Northwood Hills,228.9,220.1
+Notting Hill Gate,392.4,452.1
+Oakwood,682.2,175.2
+Old Street,638.7,388.8
+Osterley,182.9,532.2
+Oval,527.1,633.4
+Oxford Circus,498.9,432.3
+Paddington,383.5,376.8
+Park Royal,228.1,417.5
+Parsons Green,374,578.5
+Perivale,195.5,379.9
+Piccadilly Circus,518.4,464.8
+Pimlico,473.2,564.9
+Pinner,239.9,230.4
+Plaistow,875.4,392.8
+Plaistow,873.8,391.2
+Preston Road,337.2,258.6
+Putney Bridge,374,588.4
+Queen’s Park,323.4,348.9
+Queensbury,371.1,243.9
+Queensway,414.9,453.1
+Ravenscourt Park,314.4,514.5
+Rayners Lane,218.8,257
+Redbridge,870,263.6
+Regent’s Park,482.8,405.7
+Richmond,253.7,575.5
+Rickmansworth,189.2,185.7
+Roding Valley,856.9,203.4
+Royal Oak,346.3,393.6
+Royal Oak,347.9,395.2
+Ruislip,174.2,226.8
+Ruislip,174.2,229.1
+Ruislip Gardens,159.3,265.3
+Ruislip Manor,195.3,232.2
+Ruislip Manor,193.7,233.9
+Russell Square,570.6,412.5
+S t Jam e s ’ s Park,490.7,508.5
+S t Jam e s ’ s Park,490.7,510.7
+Seven Sisters,716.1,265.6
+Seven Sisters,716.1,265.6
+Shepherd’s,353.3,455
+Shepherd’s,213,447.8
+Shepherd’s Bush Market,331.7,476.4
+Shepherd’s Bush Market,329.5,476.4
+Sloane Square,448.8,514.5
+Sloane Square,448.8,512.2
+Snaresbrook,844.3,244.9
+South Ealing,216.2,503.9
+South Harrow,228.1,282.5
+South Kenton,316.8,277.8
+South Ruislip,164.8,294.7
+South Wimbledon,437.4,723.2
+South Woodford,844.3,233
+Southfields,376.6,612.7
+Southgate,679.8,189.8
+Southwark,565.8,544.8
+St John’s Wood,458.7,355
+St Paul’s,607.4,453.1
+Stamford Brook,289.1,514.5
+Stanmore,370,216.7
+Stepney Green,743,402.6
+Stepney Green,741.4,401
+Stockwell,517.4,644.9
+Stonebridge Park,316.8,305.5
+Stratford,854.8,336.6
+Sudbury Hill,228.1,303.8
+Sudbury Town,230.7,322.8
+Swiss Cottage,450.3,346.7
+Temple,571.8,508.5
+Temple,571.8,510.7
+Theydon Bois,844.3,148.4
+Tooting Bec,463.5,697
+Tooting Broadway,454.7,705.8
+Tottenham Court Road,536.8,423.3
+Tottenham Court Road,530.7,429.3
+Tottenham Hale,730.3,260.2
+Totteridge & Whetstone,587.1,178.7
+Tower Hill,682.7,465.7
+Tower Hill,691,475.1
+Tufnell Park,586.1,288.4
+Turnham Green,267.2,507.6
+Turnham Green,267.2,514.5
+Turnpike Lane,679.8,237.2
+Upminster,996,264.3
+Upminster Bridge,986.3,281.9
+Upney,920.6,343.1
+Upton Park,888.2,380
+Upton Park,886.6,378.4
+Uxbridge,111.9,227.2
+Vauxhall,481.8,608.7
+Victoria,475.9,501.6
+Victoria,471.6,512.3
+Walthamstow Central,795.6,263.6
+Wanstead,856.2,267.3
+Warren Street,539.6,391.6
+Warwick Avenue,341.7,374.9
+Waterloo,529.7,532.4
+Watford,198.1,163.8
+Wembley Central,320.6,293.6
+Wembley Park,369.9,275.7
+Wembley Park,375,270.6
+West Acton,248,453.1
+West Brompton,373.7,540.9
+West Finchley,585,199.4
+West Ham,846.4,385.8
+West Ham,855.2,394.6
+West Hampstead,437.3,336.5
+West Harrow,250.3,262.3
+West Kensington,363.7,514.5
+West Ruislip,164.8,213.9
+Westbourne Park,336.5,403.5
+Westbourne Park,338.1,405.1
+White City,332.4,457.9
+Whitechapel,725.9,420.9
+Willesden Green,407.4,303.8
+Willesden Junction,320.6,325.6
+Wimbledon,376.6,635
+Wimbledon Park,374,626.5
+Wood Green,679.8,225.3
+Wood Lane,333.2,457.8
+Woodford,843.2,218.5
+Woodside Park,585,187.8
+Bond Street,457.2,435.8
+Westminster,516.2,501.5
