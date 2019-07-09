@@ -25,14 +25,21 @@ h3 {
      margin-top: 5px;
      margin-bottom: 0;
      color: black;
+	   border-bottom-width: 0.5px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(188, 213, 230);
 }
 h4 {
      font-family: 'NJFont', 'Hammersmith One', sans-serif;
      font-size: 20px;
      font-weight: 700;
      margin-left: 5px;
-     margin-top: 5px;
-     color: white;
+     margin-top: 0px;
+	      margin-bottom: 0px;
+     color: rgb(188,213,230);
+	 	   border-bottom-width: 0.25px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(188, 213, 230);
 }
 .clearfix::after {
      content: "";
@@ -65,13 +72,9 @@ div.infoBox {
   text-align: left;
   width: 300px;
   height: 100px;
-  top: 135px;
+  top: 235px;
   right: 135px;
-  background-color: rgb(188, 213, 230);
-  border-top-width: 2px;
-  border-top-style: solid;
-  border-top-color: rgb(188, 213, 230);
-  border-radius: 1px;
+  background-color: rgb(255, 255, 255);
 }
 
 div.infoBox2 {
@@ -81,9 +84,42 @@ div.infoBox2 {
      height: 100px;
      top: 335px;
      right: 135px;
-     background-color: rgb(188, 213, 230);
-     border-top-width: 2px;
-     border-top-style: solid;
-     border-top-color: rgb(188, 213, 230);
-     border-radius: 1px;
+     background-color: rgb(255, 255, 255);
+}
+
+div.infoBox3 {
+     position: fixed;
+     text-align: left;
+     width: 300px;
+     height: 100px;
+     top: 435px;
+     right: 135px;
+     background-color: rgb(255, 255, 255);
+}
+
+.greendot {
+  height: 15px;
+  width: 15px;
+  background: green;
+  opacity: 0.75;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.reddot {
+  height: 15px;
+  width: 15px;
+  background: red;
+   opacity: 0.75;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.orangedot {
+  height: 15px;
+  width: 15px;
+  background: orange;
+   opacity: 0.75;
+  border-radius: 50%;
+  display: inline-block;
 }
