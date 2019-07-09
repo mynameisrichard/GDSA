@@ -2,7 +2,7 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="sfamaptheme.css">
-	<script src="d3.v4.js"></script>
+	<script src="https://d3js.org/d3.v4.js"></script>
 </head>
 
 <script>
@@ -35,12 +35,12 @@ var mouseOverCircle = function (d) {
 
             d3.select(this)
                 .attr("stroke-width", "2")
-                .attr("stroke", "black");
+				.attr("stroke", "black");
 
             stationInfo.transition()
                 .duration(300)
                 .style("opacity", .9);
-            stationInfo.html("<h4>" + d.station + "<br/>" + "Availability: " + d.score + "%</h4>")
+            stationInfo.html("<h4>Station: " + d.station + "</h4>" + "<h4>Availability: " + d.score + "%</h4>")
             //get mouse position - UPDATE this to 
             //.style("left", (d3.event.pageX) + "px")
             //.style("top", (d3.event.pageY - 28) + "px");
@@ -59,20 +59,24 @@ var mouseOverCircle = function (d) {
 
         //load both csvs before doing anything. v5 has promise..
         d3.queue()
-            .defer(d3.csv, "scores.csv")
-            .defer(d3.csv, "coord.csv")
+            .defer(d3.csv, "scores2.csv")
+            .defer(d3.csv, "coord2.csv")
             //data=scores.csv, data2=coord.csv
             .await(function (error, data, data2) {
                 if (error) {
                     throw (error);
                 }
                 else {
-                    //coerce scores to numbers
+					var largest = 0;
+					var smallest = 100;
+                    //coerce scores to numbers and get max and min
                     data.forEach(function (d) {
-                        d.score = +d.score;
+                        d.score = d3.format(",.2f")(+d.score);
+						if (largest < d.score) { largest = d.score;}
+						if (smallest > d.score) { smallest = d.score;}
                     });
 
-                    /*create map object. second argument sets the key, which in this case in the 14 station names in the data, returned via the anonymous function
+                    /*create map object. second argument sets the key, which in this case is the station names in the data, returned via the anonymous function
                     we can then access elements from the map object with this key.. i think! */
                     var map = d3.map(data2, function (d) { return d.Station; });
 
@@ -87,33 +91,17 @@ var mouseOverCircle = function (d) {
                     var hotSpots = d3.select("#main_map").append('g').attr("id", "hotSpots;")
 
                     //colour and size scale for hotspots. red is worst. three sizes also.
-                    var scale;
+                    var circleShade = d3.scaleLinear()
+							.domain([50	,Math.min(largest,98.5)])
+							.range(["red","orange"]);
+							
+					var circleWidth = d3.scaleLinear()
+							.domain([0,100])
+							.range([25,15])
+							.clamp(true);
 
-                    //try dynamic update with data
-                    /*hotSpots.selectAll("circle")
-                        .data(weekData)
-                        .enter().append("circle")
-                        .attr("class", "hotspot")
-                        .attr("id",function (d){ return d.station; })
-                        //use station name from data (i.e. d.station) to get x and y from data2
-                        .attr("cx", function (d, i) { return map.get(d.station).x; })
-                        .attr("cy", function (d) { return map.get(d.station).y; })
-                        .attr("r", 0)
-                        .attr("fill", "red")
-                        .attr("stroke-width","1")
-                        .attr("stroke","white")
-                        //add event listeners to each element of enter selection
-                        .on("mouseover", mouseOverCircle)
-                        .on("mousemove", mouseOverCircle)
-                        .on("mouseout", mouseOutCircle);
 
-                    //transition effect; do this afterwards otherwise the mouseevents wont work - transition.on means something different to selection.on
-                    hotSpots.selectAll("circle")
-                        .transition(growFadeIn)
-                        .attr("r", function (d) { return (d.score); })
-                        .attr("fill-opacity", "0.25");
-
-*/
+					//initial view of week 1 data
                     update(weekData)
 
                     //change data and call function when dropdown changes
@@ -140,9 +128,9 @@ var mouseOverCircle = function (d) {
                             //use station name from data (i.e. d.station) to get x and y from data2
                             .attr("cx", function (d, i) { return map.get(d.station).x; })
                             .attr("cy", function (d) { return map.get(d.station).y; })
-                            .attr("r", function (d) { return (d.score); })
-                            .attr("fill", "red")
-                            .attr("fill-opacity", "0.25")
+                            .attr("r", function (d) { return circleWidth(d.score); })
+                            .attr("fill", function (d) { if(d.score>=98.5) { return "green"; } else { return circleShade(d.score); } })
+                            .attr("fill-opacity", "0.75")
                             .attr("stroke-wdith", "1")
                             .attr("stroke", "white");
 
@@ -154,9 +142,9 @@ var mouseOverCircle = function (d) {
 
                         //update sub-heading
                         var subHead = d3.select("h2");
-                        subHead.html("Week " + selectedWeek + " / Period 03 / 2019-20");
+                        subHead.html("Week " + selectedWeek + " / Period 3 / 2019-20");
 
-                        //remove no-longer needed elements to topleft
+                        //remove no-longer needed elements - fade
                         updateSpots.exit()
                             .transition()
                             .duration(1500)
@@ -175,23 +163,31 @@ var mouseOverCircle = function (d) {
 <body>
 
     <div id="titleBar" class="titleBar">
-        <h1>STEP-FREE ACCESS UNAVAILABILITY</h1>
-        <h2>Week 1 / Period 03 / 2019-20</h1>
+        <h1>STEP-FREE ACCESS AVAILABILITY</h1>
+        <h2>Week 1 / Period 3 / 2019-20</h2>
     </div>
 
     <div id="weekSelectContainer" class="infoBox">
-        <h3>Select week:</h3>
+        <h3>SELECT</h3>
+		<h4>Week number:
         <select id="WeekNumber">
-            <option value="1" name="Bakerloo">1</option>
-            <option value="2" name="Central">2</option>
-            <option value="3" name="Victoria">3</option>
-            <option value="4" name="Victoria">4</option>
+            <option value="1" name="Week1">1</option>
+            <option value="2" name="Week2">2</option>
+            <option value="3" name="Week3">3</option>
+            <option value="4" name="Week4">4</option>
         </select>
+		</h4>
     </div>
-
+	
     <div id="stationInfoContainer" class="infoBox2">
-        <h3>Station details</h3>
+        <h3>DETAIL</h3>
     </div>
+	
+	<div id="Key" class="infoBox3">
+		<h3>KEY</h3>
+		<h4>On target (>98.5%):  <span class="greendot"></span></h4>  
+		<h4>Off target (&lt;98.5%): <span class="reddot"></span> - <span class="orangedot"></span></h4>  
+	</div>
 
     <div id="mapCanvas" class="mapCanvas"></div>
 
