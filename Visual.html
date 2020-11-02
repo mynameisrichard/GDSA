@@ -8,7 +8,7 @@
 <script>
 
 	//grab tube map and add all nodes to body
-	d3.xml("TubeMap.svg").mimeType("image/svg+xml").get(function (error, xml) {
+	d3.xml("https://raw.githubusercontent.com/mynameisrichard/GDSA/master/TubeMap.svg").mimeType("image/svg+xml").get(function (error, xml) {
 
 		if (error) throw error;
 		d3.select("#mapCanvas").node().appendChild(xml.documentElement);
@@ -59,8 +59,8 @@ var mouseOverCircle = function (d) {
 
         //load both csvs before doing anything. v5 has promise..
         d3.queue()
-            .defer(d3.csv, "scores.csv")
-            .defer(d3.csv, "coord.csv")
+            .defer(d3.csv, "https://raw.githubusercontent.com/mynameisrichard/GDSA/master/scores.csv")
+            .defer(d3.csv, "https://raw.githubusercontent.com/mynameisrichard/GDSA/master/coord.csv")
             //data=scores.csv, data2=coord.csv
             .await(function (error, data, data2) {
                 if (error) {
