@@ -2,7 +2,7 @@ body {
      margin: 0;
 }
 h1 {
-     font-family: 'NJFont', 'Hammersmith One', sans-serif;
+     font-family: 'NJFont', 'Calibri', sans-serif;
      font-size: 28px;
      font-weight: 700px;
      margin-left: 5px;
@@ -10,7 +10,7 @@ h1 {
      color: rgb(0,0,0);
 }
 h2 {
-     font-family: 'NJFont', 'Hammersmith One', sans-serif;
+     font-family: 'NJFont', 'Calibri', sans-serif;
      font-size: 28px;
      font-weight: 700;
      margin-left: 5px;
@@ -18,7 +18,7 @@ h2 {
      color: rgb(188,213,230);
 }
 h3 {
-     font-family: 'NJFont', 'Hammersmith One', sans-serif;
+     font-family: 'NJFont', 'Calibri', sans-serif;
      font-size: 20px;
      font-weight: 700;
      margin-left: 5px;
@@ -30,7 +30,7 @@ h3 {
   border-bottom-color: rgb(188, 213, 230);
 }
 h4 {
-     font-family: 'NJFont', 'Hammersmith One', sans-serif;
+     font-family: 'NJFont', 'Calibri', sans-serif;
      font-size: 20px;
      font-weight: 700;
      margin-left: 5px;
